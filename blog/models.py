@@ -23,6 +23,7 @@ class Post(models.Model):
     content = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     likes = models.ManyToManyField(User,related_name='blog_posts',blank=True)
+    
 
     def get_absolute_url(self):
         return reverse('blogPost',args=(str(self.id)))
