@@ -38,9 +38,14 @@ list-group-item-action ">{{category.category}}</a>
             <strong class="d-inline-block mb-2 text-primary">Article  by {{post.author}}</strong>
             <h3 class="mb-0"><a class="text-dark" href="/blog/{{post.slug}}/{{post.pk}}"{{post.title}} </a> </h3>
             <div class="mb-1 text-muted">{{post.datetime}}</div>
-            <p class="card-text mb-auto">{{post.content|safe| truncatechars:500}}</p>
+<!--            <p class="card-text mb-auto">{{post.content|safe| truncatechars:500}}-<small></small><a href="/update_post/{{post.slug}}/{{post.pk}}">(Edit)</a> </p></small>-->
+            <p class="card-text mb-auto">{{post.content|safe| truncatechars:500}}-<small><a href="blogPost/edit/{{post.slug}}/{{post.pk}}">(Edit)</a> </p>
+            <a href="blogPost/{{post.slug}}/{{post.pk}}/remove">(Delete)</a>
+
+            </small>
+
             <div class="my-2">
-            	<a href="/blog/{{post.slug}}/{{post.pk}}" role="button" class="btn btn-primary">Continue reading</a>
+            	<a href="{{post.slug}}/{{post.pk}}" role="button" class="btn btn-primary">Continue reading</a>
             </div>
 
         </div>

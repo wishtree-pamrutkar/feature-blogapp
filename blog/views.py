@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.http.response import HttpResponseRedirect
 from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 from django.urls import reverse_lazy, reverse
-from django.views.generic import DetailView, CreateView
+from django.views.generic import DetailView, CreateView, UpdateView, DeleteView
 from blog.models import Post, BlogComment, Category
 from django.contrib import messages
 from django.contrib.auth.models import User
@@ -47,6 +47,7 @@ def blogHome(request):
 def blogPost(request, slug, pk, *args, **kwargs):
     post = Post.objects.filter(slug=slug).first()
     comments = BlogComment.objects.filter(post=post, parent=None)
+
     replies = BlogComment.objects.filter(post=post).exclude(parent=None)
     replyDict = {}
     for reply in replies:
@@ -92,4 +93,18 @@ def postComment(request):
 class AddPostView(CreateView):
     model = Post
     template_name = 'blog/add_post.html'
-    fields = ['title','author','slug','content','category']
+    fields = ['title', 'author', 'slug', 'content', 'category']
+
+
+class UpdatePostView(UpdateView):
+    model = Post
+    template_name = 'blog/update_post.html'
+    fields = ['title', 'slug', 'content']
+
+
+class DeletePostView(DeleteView):
+    model = Post
+    template_name = 'blog/delete_post.html'
+    success_url = reverse_lazy('home')
+
+

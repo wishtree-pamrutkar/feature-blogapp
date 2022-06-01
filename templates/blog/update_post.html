@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block title %} Edit blog post {% endblock title %}
+{% block body %}
+
+<h1>Update blog post</h1>
+{% load humanize %}
+{% load extras %}
+<div class="form-group">
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button class="btn btn-secondary">update</button>
+</form>
+    </div>
+
+{% endblock %}

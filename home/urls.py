@@ -1,5 +1,7 @@
 from django.contrib import admin
 from django.urls import path,include
+
+from blog.views import UpdatePostView
 from home import views
 #from django.conf.urls import url
 
@@ -11,8 +13,5 @@ urlpatterns = [
     path('signup', views.handleSignUp, name="handleSignUp"),
     path('login', views.handeLogin, name="handleLogin"),
     path('logout', views.handelLogout, name="handleLogout"),
-
-
-
 
 ]

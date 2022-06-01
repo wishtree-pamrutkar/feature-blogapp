@@ -43,6 +43,7 @@ def search(request):
 def handleSignUp(request):
     if request.method == "POST":
         # Get the post parameters
+        print("REQUEST POST", request.POST)
         username = request.POST['username']
         email = request.POST['email']
         fname = request.POST['fname']
@@ -59,14 +60,16 @@ def handleSignUp(request):
             messages.error(request, " User name should only contain letters and numbers")
             return redirect('home')
         if (pass1 != pass2):
-            messages.error(request, " Passwords do not match")
+            messages.error(request, "Passwords do not match")
             return redirect('home')
+            # alert("Username taken");
 
         # Create the user
         myuser = User.objects.create_user(username, email, pass1)
         myuser.first_name = fname
         myuser.last_name = lname
         myuser.save()
+        # return "Your iCoder has been successfully created"
         messages.success(request, " Your iCoder has been successfully created")
         return redirect('home')
 
