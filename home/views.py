@@ -31,9 +31,9 @@ def search(request):
         allPosts = Post.objects.none()
     else:
         allPostsTitle = Post.objects.filter(title__icontains=query)
-        allPostsAuthor = Post.objects.filter(author__icontains=query)
+        # allPostsAuthor = Post.objects.filter(author__icontains=query)
         allPostsContent = Post.objects.filter(content__icontains=query)
-        allPosts = allPostsTitle.union(allPostsContent, allPostsAuthor)
+        allPosts = allPostsTitle.union(allPostsContent)
     if allPosts.count() == 0:
         messages.warning(request, "No search results found. Please refine your query.")
     params = {'allPosts': allPosts, 'query': query}

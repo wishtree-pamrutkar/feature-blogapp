@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} Edit blog post {% endblock title %}
 {% block body %}
-
+{% if user.is_authenticated %}
 <h1>Update blog post</h1>
 {% load humanize %}
 {% load extras %}
@@ -13,5 +13,8 @@
     <button class="btn btn-secondary">update</button>
 </form>
     </div>
+{% else %}
+ you are  not allowed here! (and you know it...)
 
+{% endif %}
 {% endblock %}

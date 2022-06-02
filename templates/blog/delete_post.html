@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block title %} Delete blog post {% endblock title %}
 {% block body %}
+{% if user.is_authenticated %}
 
 <h1>Delete blog post</h1>
 {% load humanize %}
@@ -14,5 +15,8 @@
     <button class="btn btn-secondary">Delete</button>
 </form>
     </div>
+{% else %}
+you are not allowed here!(and you know it)
 
+{% endif %}
 {% endblock %}
