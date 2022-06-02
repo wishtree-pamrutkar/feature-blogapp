@@ -2,14 +2,25 @@
 {% block title %} Blogpost{% endblock title %}
 {% block body %}
 {% if user.is_authenticated %}
-<h1>Add post</h1>
+    <h1>Add post</h1>
+
 {% load humanize %}
 {% load extras %}
+<div class="ml-3 >(1.5rem=48px)">
+
 <form method="POST">
     {% csrf_token %}
+    {{ form.media}}
     {{ form.as_p }}
     <button class="btn btn-secondary">Post</button>
 </form>
+    </div>
+
+<!--<script>-->
+<!--    var name ="{{"user.username"}};-->
+<!--    document.getElementById("elder").placeholder=name;-->
+<!--</script>-->
+
 {% else %}
 you are allowed here ! (and you know it ..)
 {% endif %}

@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.utils.timezone import now
+from ckeditor.fields import RichTextField
+
 
 class Category(models.Model):
     category = models.CharField(max_length=30)
@@ -10,26 +12,27 @@ class Category(models.Model):
     def get_all_categories():
         Category.objects.all()
 
-
     def __str__(self):
         return self.category
+
 
 class Post(models.Model):
     sno = models.AutoField(primary_key=True)
     title = models.CharField(max_length=255)
-    author = models.ForeignKey(User,on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     slug = models.CharField(max_length=130)
-    timeStamp = models.DateTimeField(blank=True,auto_now=True)
-    content = models.TextField()
+    timeStamp = models.DateTimeField(blank=True, auto_now=True)
+    content = RichTextField(blank=True, null=True)
+    # content = models.TextField()
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    likes = models.ManyToManyField(User,related_name='blog_posts',blank=True)
-    # featurepost =
+    # snippet = models.CharField(max_length=255, default='Click Link Above To Read BlogPost..')
+    likes = models.ManyToManyField(User, related_name='blog_posts', blank=True)
 
+    # featurepost =
 
     def get_absolute_url(self):
         # return reverse('blogPost',args=(str(self.id)))
         return reverse('home')
-
 
     def total_likes(self):
         return self.likes.count()
@@ -41,23 +44,23 @@ class Post(models.Model):
     @staticmethod
     def get_all_post_by_categoryid(category_id):
         if category_id:
-            return Post.objects.filter(category = category_id)
+            return Post.objects.filter(category=category_id)
         else:
             return Post.get_all_post();
 
     def num_likes(self):
         return self.likes.all().count()
 
-
-
     def __str__(self):
         return self.title + " by " + str(self.author)
+
 
 LIKE_CHOICES = (
 
     ('Like', 'Like'),
-    ('Unlike','Unlike')
+    ('Unlike', 'Unlike')
 )
+
 
 class BlogComment(models.Model):
     sno = models.AutoField(primary_key=True)
@@ -79,7 +82,6 @@ class BlogComment(models.Model):
 #
 #     def __str__(self):
 #         return str(self.post)
-
 
 
 0

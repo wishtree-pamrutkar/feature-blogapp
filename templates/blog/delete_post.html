@@ -12,11 +12,11 @@
 <form method="POST">
     {% csrf_token %}
     <strong> Are you sure?!</strong><br/><br/>
-    <button class="btn btn-secondary">Delete</button>
+    <button class="btn btn-secondary">Delete Post!</button>
 </form>
     </div>
 {% else %}
 you are not allowed here!(and you know it)
-
 {% endif %}
+
 {% endblock %}
